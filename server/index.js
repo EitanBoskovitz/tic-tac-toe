@@ -14,11 +14,11 @@ const serverClient = StreamChat.getInstance(api_key, api_secret);
 
 app.post("/signup", async (req, res) => {
     try {
-        const { userName, password } = req.body;
+        const { username, password } = req.body;
         const userID = v4();
         const hashedPassword = await bcrypt.hash(password, 10);
         const token = serverClient.createToken(userID);
-        res.json({ token, userID, userName, hashedPassword });
+        res.json({ token, userID, username, hashedPassword });
     } catch (error) {
         res.json(error);
     }
@@ -27,8 +27,8 @@ app.post("/signup", async (req, res) => {
 
 app.post("/login", async (req, res) => {
     try {
-        const { userName, password } = req.body
-        const { users } = await serverClient.queryUsers({ name: userName });
+        const { username, password } = req.body
+        const { users } = await serverClient.queryUsers({ name: username });
         if (users.length === 0) return res.json({ message: "user not found" });
 
         const token = serverClient.createToken(users[0].id);
@@ -37,7 +37,7 @@ app.post("/login", async (req, res) => {
         if (passwordMatch) {
             res.json({
                 token,
-                userName,
+                username,
                 userID: users[0].id,
             })
         }
