@@ -18,7 +18,7 @@ function SignUp() {
             })
     };
     return (
-        <div>
+        <div className="signUp">
             <label>Sign Up</label>
             <input placeholder="Username" onChange={(event) => {
                 setUser({ ...user, username: event.target.value })

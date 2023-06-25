@@ -20,7 +20,7 @@ function Login() {
             })
     };
     return (
-        <div>
+        <div className="login">
             <label>Login</label>
             <input placeholder="User Name" onChange={(event) => {
                 setUsername(event.target.value);
