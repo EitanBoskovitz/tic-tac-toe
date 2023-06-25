@@ -9,17 +9,20 @@ function SignUp() {
     const signUp = () => {
         Axios.post("http://localhost:3001/signup", user)
             .then(res => {
-                const { userID, userName, hashedPassword } = res.data;
+                const { token, userID, userName, hashedPassword } = res.data;
+                console.log(userID);
+                cookies.set("token", token);
                 cookies.set("userID", userID);
                 cookies.set("userName", userName);
                 cookies.set("hashedPassword", hashedPassword);
+
             })
     };
     return (
         <div>
             <label>Sign Up</label>
             <input placeholder="User Name" onChange={(event) => {
-                setUser({ ...user, username: event.target.value })
+                setUser({ ...user, userName: event.target.value })
             }} />
             <input placeholder="Password" onChange={(event) => {
                 setUser({ ...user, password: event.target.value })
