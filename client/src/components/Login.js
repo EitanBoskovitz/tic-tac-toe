@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function Login() {
     const [user, setUser] = useState(null);
-    const login = () => {}
+    const login = () => {};
     return (
         <div>
             <label>Login</label>
@@ -12,7 +12,9 @@ function Login() {
             <input placeholder="Password" onChange={(event) => {
                 setUser({ ...user, password: event.target.value })
             }} />
-            <button onClick={login}/> Login
+            <button onClick={login}> Login</button>
         </div>
     )
 }
+
+export default Login;
