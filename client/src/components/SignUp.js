@@ -27,7 +27,7 @@ function SignUp() {
                 onChange={(event) => {
                     setUser({ ...user, password: event.target.value })
                 }} />
-            <button onClick={signUp}> SignUp</button>
+            <button onClick={signUp}> Sign Up</button>
         </div>
     )
 }
