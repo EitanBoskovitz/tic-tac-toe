@@ -3,13 +3,15 @@ import './App.css';
 import Login from "./components/Login"
 import SignUp from "./components/SignUp"
 import { StreamChat } from "stream-chat";
+import { useState } from 'react'
 
 function App() {
   const api_key = "eeubfvakebsc";
   const cookies = new Cookies();
   const token = cookies.get("token");
   const client = StreamChat.getInstance(api_key);
-  console.log(cookies.get("token"));
+
+  const [isAuth, setIsAuth] = useState(false);
 
   if (token) {
     client.connectUser(
@@ -19,13 +21,19 @@ function App() {
         hashedPassword: cookies.get("hashedPassword"),
       },
       token
-    )
+    ).then((user) => {
+      setIsAuth(true);
+    })
   }
 
   return (
-    <div className="App">
-      <SignUp />
-      <Login />
+    <div className="App" >
+      {isAuth ? (<h1> Game</h1>) : (
+        <>
+          <SignUp setIsAuth={setIsAuth} />
+          <Login setIsAuth={setIsAuth} />
+        </>
+      )}
     </div>
   );
 }
