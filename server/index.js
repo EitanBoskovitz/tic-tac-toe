@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const gameboardRouters = require("./routes/gameLogicRoutes");
 const { StreamChat } = require('stream-chat');
 const { v4 } = require("uuid");
 const bcrypt = require("bcrypt");
@@ -51,6 +52,8 @@ app.post("/login", async (req, res) => {
       res.json(error);
     }
   });
+
+app.use('/gameboard', gameboardRouters);
   
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
