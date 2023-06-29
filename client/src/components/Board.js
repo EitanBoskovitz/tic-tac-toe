@@ -1,4 +1,4 @@
-import React , { useState }from "react";
+import React , {useEffect, useState }from "react";
 import {useChannelStateContext, useChatContext} from "stream-chat-react"
 import Square from "./Square";
 import Axios from "axios";
@@ -11,6 +11,12 @@ function Board() {
     const [board, setBoard] = useState(Array(9).fill(""));
     const [player, setPlayer] = useState("X");
     const [turn, setTurn] = useState("X")
+
+    //on each board state change, check for win
+    useEffect(() => {
+        checkWin();
+      }, [board]);
+
 
     const chooseSquare = async (squarePlacement) => {
         Axios.post("http://localhost:3001/gameboard/choosesquare", {
@@ -30,6 +36,18 @@ function Board() {
             }
         ))
 
+    }
+
+    const checkWin = () => {
+        Axios.post("http://localhost:3001/gameboard/checkwin", {
+            board
+    }).then(res => {
+        const { winner, state } = res.data;
+        if(state === "won"){
+        alert(`${winner} WON!`)
+        }
+
+    })
     }
 
 //when the event is received, if this client is not the player that sent the event, mirror the other player's board 
