@@ -1,24 +1,24 @@
 import React , { useState }from "react";
-import Sqaure from "./Square";
+import Square from "./Square";
 
 function Board() {
     const [board, setBoard] = useState(Array(9).fill(""));
 
     return <div className="board">
         <div className="row">
-            <Sqaure  value={board[0]}/>
-            <Sqaure value={board[1]}/>
-            <Sqaure value={board[2]}/>
+            <Square  value={board[0]}/>
+            <Square value={board[1]}/>
+            <Square value={board[2]}/>
         </div>
         <div className="row">
-            <Sqaure value={board[3]}/>
-            <Sqaure value={board[4]}/>
-            <Sqaure value={board[5]}/>
+            <Square value={board[3]}/>
+            <Square value={board[4]}/>
+            <Square value={board[5]}/>
         </div>
         <div className="row">
-            <Sqaure value={board[6]}/>
-            <Sqaure value={board[7]}/>
-            <Sqaure value={board[8]}/>
+            <Square value={board[6]}/>
+            <Square value={board[7]}/>
+            <Square value={board[8]}/>
         </div>
     </div>
 }
