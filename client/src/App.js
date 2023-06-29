@@ -2,8 +2,10 @@ import Cookies from 'universal-cookie';
 import './App.css';
 import Login from "./components/Login"
 import SignUp from "./components/SignUp"
+import JoinGame from "./components/JoinGame";
 import { StreamChat } from "stream-chat";
 import { useState } from 'react'
+import { Chat } from 'stream-chat-react'
 
 function App() {
   const api_key = "eeubfvakebsc";
@@ -26,9 +28,12 @@ function App() {
     })
   }
 
+  //casing any component with the Chat component allowes us to have client as props for all the components cased inside
   return (
     <div className="App" >
-      {isAuth ? (<h1> Game</h1>) : (
+       {isAuth ? (<Chat client={client}>
+        <JoinGame />
+      </Chat>) : (
         <>
           <SignUp setIsAuth={setIsAuth} />
           <Login setIsAuth={setIsAuth} />
