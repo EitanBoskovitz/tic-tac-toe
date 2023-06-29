@@ -19,5 +19,4 @@ app.post("/choosesquare", async (req, res) => {
 
 })
 
-const firstPress = (board) => board.every((value) => value === "")
 module.exports = app

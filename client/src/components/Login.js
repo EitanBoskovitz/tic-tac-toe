@@ -8,7 +8,7 @@ function Login({setIsAuth}) {
 
     const cookies = new Cookies();
     const login = () => {
-        Axios.post("http://localhost:3001/login", {
+        Axios.post("http://localhost:3001/user/login", {
             username,
             password
         })

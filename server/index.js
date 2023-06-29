@@ -1,58 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const gameboardRouters = require("./routes/gameLogicRoutes");
-const { StreamChat } = require('stream-chat');
-const { v4 } = require("uuid");
-const bcrypt = require("bcrypt");
+const userRoutes = require('./routes/userRoutes')
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const api_key = "eeubfvakebsc"
-const api_secret = "3qr38ng6h4qfudvr7583affwkewxjxz72n8vdpubpyxhvke4q8y4kv4hqxjx4334"
-const serverClient = StreamChat.getInstance(api_key, api_secret);
-
-app.post("/signup", async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        const userId = v4();
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const token = serverClient.createToken(userId);
-        res.json({ token, userId, username, hashedPassword });
-    } catch (error) {
-        res.json(error);
-    }
-
-})
-
-app.post("/login", async (req, res) => {
-    try {
-      const { username, password } = req.body
-      const { users } = await serverClient.queryUsers({ name: username });
-      if (users.length === 0) {
-        return res.json({ message: "User not found" });
-      } 
-  
-    
-      const token = serverClient.createToken(users[0].id);
-      const passwordMatch = await bcrypt.compare(
-        password,
-        users[0].hashedPassword
-      );
-  
-      if (passwordMatch) {
-        res.json({
-          token,
-          username,
-          userId: users[0].id,
-        });
-      }
-    } catch (error) {
-      res.json(error);
-    }
-  });
-
+app.use('/user', userRoutes);
 app.use('/gameboard', gameboardRouters);
   
 app.listen(3001, () => {

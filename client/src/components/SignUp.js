@@ -7,7 +7,7 @@ function SignUp({setIsAuth}) {
     const cookies = new Cookies();
 
     const signUp = () => {
-        Axios.post("http://localhost:3001/signup", user)
+        Axios.post("http://localhost:3001/user/signup", user)
             .then(res => {
                 const { token, userId, username, hashedPassword } = res.data;
                 cookies.set("token", token);
