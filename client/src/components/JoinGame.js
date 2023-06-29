@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useChatContext} from "stream-chat-react";
+import { useChatContext } from "stream-chat-react";
+import Game from "./Game"
 
 function JoinGame() {
     //becasuse JoinGame is encased by the Chat component, we are able to get client without usage of props
@@ -29,7 +30,7 @@ function JoinGame() {
         <>
             {channel ?
                 (
-                    <h1> Game started</h1>
+                    <Game />
                 ) :
                 (
                     < div className="joinGame" >
